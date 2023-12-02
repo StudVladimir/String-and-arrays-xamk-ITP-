@@ -42,6 +42,8 @@
 
             // 3.3 If the word is found, get the index of the word from helloWorld string
             Console.WriteLine($"Word is found = {containsWorld}");
+            if (containsWorld == true)
+                Console.WriteLine($"Index of word: {helloWorld.IndexOf("World")}");
 
             // PART 2: Arrays
 
@@ -98,21 +100,9 @@
             //     by finding out it's index.
             //     Assign the index value to new position integer variable
             Array.Reverse(names);
-            int position=-1;
-            for (int i = 0; i < names.Length; i++)
-            {
-                
-            }
-
-            int num = 0;
-            while (num<names.Length)
-            {
-                if (names[num] == searchName)
-                {
-                    position = num;
-                    break;
-                }
-            }
+            int position = -1;
+            if (names.Contains(searchName))
+                position = Array.IndexOf(names, searchName);
 
             // 3.2 Check that the index position was found
             //     Hint: What is the result of IndexOf if nothing is found
@@ -122,6 +112,8 @@
             {
                 Console.WriteLine($"Name is {searchName}. Position is: {position}");
             }
+            else
+                Console.WriteLine("Name is not found");
 
             // 4. BONUS
 
@@ -129,37 +121,16 @@
             // 1.1 Create new empty words string array
             string[] words;
 
-
             // 1.2 Try to get each word from the helloWorld variable and assing the values to
             //     the created words string array
-            List<string> listwords = new List<string>();
-            int firstindex = 0;
-            int lastindex = 0;
-            string word ="";
-            for (int i = 0; i < helloWorld.Length; i++)
-            {
-                if (helloWorld[i]==' '|| i==helloWorld.Length-1)
-                {
-                    lastindex = i;
-                    for (int q = firstindex; q <= lastindex; q++)
-                    {
-                         word+=helloWorld[q];
-                    }
-                    firstindex = lastindex+1;
-                    listwords.Add(word);
-                    word = "";
-                }
-            }
-            words = listwords.ToArray();
+            words = helloWorld.Split(' ','!',',');
+            words = words.Where(x => x != "").ToArray();
+
             // 1.3 Output the values of the words array
-            int count = 1;
-            foreach (string item in words)
+            foreach (var item in words)
             {
-                Console.Write($"Value {count} - ");
-                Console.WriteLine(item);
-                count++;
+                Console.WriteLine($"Element - {item}, index - {Array.IndexOf(words,item)}");
             }
-                
 
             Console.ReadLine();
         }
